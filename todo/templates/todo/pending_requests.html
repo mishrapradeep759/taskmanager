@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <th>Username</th>
+        <th>Email</th>
+
+    </thead>
+    <tbody>
+    {% for request in pending_requests %}
+
+        <tr>
+            <td>
+                {{request.user.username}}
+
+            </td>
+            <td>
+                {{request.user.email}}
+            </td>
+            <td><a href="{% url 'todo:approve' user_id=request.user.id %}">Approve</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+{% block registration %}
+{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+    {{registration_form|crispy}}
+    <input type="submit" value="Sign Up">
+    <p>
+        If already have registered, <a href="{% url 'todo:login' %}">Sign In</a>
+    </p>
+</form>
+{% endblock registration %}

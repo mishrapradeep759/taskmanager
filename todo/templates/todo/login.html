@@ -1,0 +1,15 @@
+{% block login %}
+{% load crispy_forms_tags %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form|crispy}}
+
+    <input type="submit" value="signin">
+    <p>
+        <!--automate below /todo/ part as per namespace -->
+
+        If don't have an account, click on <a href="/taskmanager/">SingUp</a>
+    </p>
+</form>
+{% endblock login %}

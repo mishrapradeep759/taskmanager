@@ -1,0 +1,20 @@
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/taskmanager/">taskmanager</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/taskmanager/">Home</a></li>
+        {% if user.is_authenticated %}
+
+      <li><a href="{% url 'todo:logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'todo:login' %}">Logout</a></li>
+        <li><a href="/taskmanager/">Register</a></li>
+
+        {% endif %}
+
+    </ul>
+  </div>
+</nav>

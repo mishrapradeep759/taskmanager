@@ -1,0 +1,19 @@
+
+{% for user in users %}
+
+    {% if not user.is_admin %}
+        <table>
+            <tr>
+                <td>Please approve login for {{user.user.username}}</td>
+                <td><a href="#">Aprove Task</a></td>
+            </tr>
+        </table>
+    {% else %}
+        <p>View Task</p>
+        <p>Assign Task</p>
+
+    {% endif %}
+{% endfor %}
+
+
+<p><a href="#">Approve Task</a></p>

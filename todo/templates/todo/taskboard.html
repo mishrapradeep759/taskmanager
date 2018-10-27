@@ -1,0 +1,30 @@
+
+<html>
+
+<table>
+    <thead>
+        <th>Task</th>
+        <th>Assignee</th>
+        <th>Assignor</th>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td align="center">{{task.content}}</td>
+                <td align="center">{{task.assignee}}</td>
+                <td align="center">{{task.assignor}}</td>
+                <td>
+                    {% if task.is_completed %}:
+                        <p>Completed</p>
+                    {% else %}
+                        <a href="#">
+                        <button class="btn">completed</button>
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</html>
