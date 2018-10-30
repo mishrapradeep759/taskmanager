@@ -1,15 +1,17 @@
 {% block login %}
 {% load crispy_forms_tags %}
+<title>Login</title>
+{% if error %}
+    <p style="color:red;">{{error}}</p>
+{% endif %}
 
 <form method="POST">
     {% csrf_token %}
     {{form|crispy}}
 
-    <input type="submit" value="signin">
+    <input type="submit" value="Log In">
     <p>
-        <!--automate below /todo/ part as per namespace -->
-
-        If don't have an account, click on <a href="/taskmanager/">SingUp</a>
+        If don't have an account, click on <a href="/taskmanager/">Sign Up</a>
     </p>
 </form>
 {% endblock login %}

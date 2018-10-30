@@ -1,30 +1,77 @@
 
 <html>
 
-<table>
-    <thead>
-        <th>Task</th>
-        <th>Assignee</th>
-        <th>Assignor</th>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-            <tr>
-                <td align="center">{{task.content}}</td>
-                <td align="center">{{task.assignee}}</td>
-                <td align="center">{{task.assignor}}</td>
-                <td>
-                    {% if task.is_completed %}:
-                        <p>Completed</p>
-                    {% else %}
-                        <a href="#">
-                        <button class="btn">completed</button>
-                    </a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+</head>
+
+{% if not tasks %}
+    <h2>You don't have any task to work on</h2>
+{% else %}
+    <table style="width:70%">
+        <tr>
+            <th>Task</th>
+            <th>Assignee</th>
+            <th>Assigned By</th>
+            <th>Status</th>
+            <th>Edit Task</th>
+            <th>Delete Task</th>
+        </tr>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td align="center" width="200px">{{task.content}}</td>
+                    <td align="center">{{task.assignee}}</td>
+                    <td align="center">{{task.assignor}}</td>
+                    <td align="center">
+                        {% if task.is_completed %}
+                            <p align="center">Completed</p>
+
+                        {% elif not task.is_completed and request.user.profile.is_admin or task.assignor == request.user %}
+                            <p align="center">Pending</p>
+
+                        {% else %}
+                            <a href="{% url 'todo:taskcompleted' task_id=task.id%}">
+                                <button class="btn">completed</button>
+                            </a>
+                        {% endif %}
+                    </td>
+
+                    <!--
+                   Edit Task
+                    -->
+                    <td align="center">
+                        {% if not task.is_completed and task.assignor == request.user %}
+
+                            <a href="{% url 'todo:edittask' task_id=task.id%}">
+                                <button type="button" class="btn">Edit Task</button>
+                            </a>
+                        {% endif %}
+                    </td>
+
+                    <!--
+                   Delete Task
+                    -->
+                    <td>
+                        {% if not task.is_completed and task.assignor == request.user %}
+
+                            <a href="{% url 'todo:deletetask' task_id=task.id%}">
+                                    <button type="button" class="btn">Delete Task</button>
+                                </a>
+                        {% endif %}
+                    </td>
+
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+<a href="{% url 'todo:logout' %}"><button class="btn">Logout</button></a>
 
 </html>

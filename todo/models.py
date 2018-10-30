@@ -9,9 +9,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-    group = models.ForeignKey(Group, on_delete=models.PROTECT)
+    group = models.ForeignKey(Group)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username
 
 
@@ -20,5 +20,8 @@ class Task(models.Model):
     content = models.TextField()
     assignee = models.ForeignKey(User, related_name="assignee")
     assignor = models.ForeignKey(User, related_name="assignor")
+
+    def __unicode__(self):
+        return self.content
 
 
